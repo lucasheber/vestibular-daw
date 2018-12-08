@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row mt-5"></div>
+
+		<div class="row mt-5">
+			<div class="col-sm-12 col-md-12">
+				<h3 class="text-left">Curso</h3>
+				<hr />
+			</div>
+		</div>
+
+		<div class="col">
+			<h:form id="cadastro">
+				<div class="form-group col-md-4">
+					<label for="nome">Nome</label>
+					<p:inputText styleClass="form-control" id="nome"
+						value="#{courseBeans.course.name}" />
+				</div>
+
+				<div class="form-group col-md-4">
+					<label for="sigla">Sigla</label>
+					<p:inputMask styleClass="form-control" id="sigla" mask="aaa"
+						value="#{courseBeans.course.initials}" />
+				</div>
+
+				<div class="form-group col-md-4">
+					<label for="vagas">Qtd. Vagas</label>
+					<p:inputNumber
+						style="padding: 0; border: none; width: 100%; display: inline-grid;"
+						styleClass="form-control" id="vagas"
+						value="#{courseBeans.course.numVacancy}" />
+				</div>
+
+				<div class="form-group col-md-4 mt-5">
+					<h:commandButton class="btn btn-success btn-block"
+						value="Cadastrar" action="#{courseBeans.register}">
+						<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+					</h:commandButton>
+				</div>
+			</h:form>
+		</div>
+
+		<div class="col mt-5">
+			<h:form id="lista">
+				<fieldset>
+					<h:dataTable styleClass="table" value="#{courseBeans.courses}" var="course">
+
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							#{course.name}
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Sigla</f:facet>
+							#{course.initials}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Vagas</f:facet>
+							#{course.numVacancy}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Inscritos</f:facet>
+							#{course.totalSubscribers}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink styleClass="btn btn-sm btn-primary" value="Alterar" >
+								<f:setPropertyActionListener value="#{course}" target="#{courseBeans.course}" />
+								<f:ajax execute="@form" render=":cadastro"></f:ajax>
+							</h:commandLink>
+						
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink styleClass="btn btn-sm btn-danger text-center" action="#{courseBeans.delete(course)}" value="Remover">
+								<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+							</h:commandLink>
+						</p:column>
+					</h:dataTable>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row mt-5"></div>
+
+		<div class="row mt-5">
+			<div class="col-sm-12 col-md-12">
+				<h3 class="text-left">Candidato</h3>
+				<hr />
+			</div>
+		</div>
+
+		<div class="container">
+			<h:form id="cadastro">
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="birthday">Curso</label>
+						<h:selectOneMenu styleClass="form-control" value="#{candidateBeans.idCourse}">
+							<f:selectItem itemLabel="-- Escolha um curso -- " itemValue="0"/>
+							<f:selectItems value="#{courseBeans.courses}" var="course" itemValue="#{course.id}" itemLabel="#{course.name}" />
+							<f:ajax event="change" listener="#{candidateBeans.numVacancy}" process="@form" render="vacancy" />
+						</h:selectOneMenu>
+					</div>
+					
+					<div class="form-group col-md-2">
+						<label for="vacancy">Vagas Disponíveis: </label>
+						<h:inputText id="vacancy" class="form-control" type="text" readonly="true" value="#{candidateBeans.vacancy}"/>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="nome">Nome</label>
+						<p:inputText styleClass="form-control" id="nome"
+							placeholder="Nome" value="#{candidateBeans.candidate.name}" />
+					</div>
+					<div class="form-group col-md-4">
+						<label for="cpf">CPF</label>
+						<p:inputMask styleClass="form-control" id="cpf"
+							mask="999.999.999-99" value="#{candidateBeans.candidate.cpf}" />
+					</div>
+					<div class="form-group col-md-4">
+						<label for="birthday">Data Nascimento</label>
+						<p:inputMask type="date" id="birthday" styleClass="form-control"
+							value="#{candidateBeans.candidate.birthdayStr}" />
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="city">Cidade</label>
+						<p:inputText styleClass="form-control" id="city"
+							value="#{candidateBeans.candidate.address.city}" />
+					</div>
+					<div class="form-group col-md-4">
+						<label for="bairro">Bairro</label>
+						<p:inputText styleClass="form-control" id="bairro"
+							value="#{candidateBeans.candidate.address.neighborhood}" />
+					</div>
+					<div class="form-group col-md-2">
+						<label for="estado">Estado</label>
+						<p:inputMask styleClass="form-control" id="estado" mask="AZ"
+							value="#{candidateBeans.candidate.address.state}" />
+					</div>
+					<div class="form-group col-md-2">
+						<label for="cep">CEP</label>
+						<p:inputMask styleClass="form-control" id="cep" mask="99999-999"
+							value="#{candidateBeans.candidate.address.cep}" />
+					</div>
+
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="rua">Rua</label>
+						<p:inputText styleClass="form-control"
+							value="#{candidateBeans.candidate.address.street}" />
+					</div>
+					<div class="form-group col-md-4">
+						<label for="complemento">Complemento</label>
+						<p:inputText styleClass="form-control" id="complemento"
+							value="#{candidateBeans.candidate.address.complement}" />
+					</div>
+					<div class="form-group col-md-2">
+						<label for="number">Número</label>
+						<p:inputNumber id="number"
+							value="#{candidateBeans.candidate.address.number}" />
+					</div>
+				</div>
+
+				<h:commandButton value="Cadastrar" class="btn btn-primary mt-3" action="#{candidateBeans.register}"></h:commandButton>
+			</h:form>
+		</div>
+		
+		<div class="col mt-5">
+			<h:form id="lista">
+				<fieldset>
+					<h:dataTable styleClass="table" value="#{candidateBeans.candidates}" var="candidate">
+						
+						<p:column>
+							<f:facet name="header">N° Inscrição</f:facet>
+							#{candidate.registrationNumber}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							#{candidate.name}
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">CPF</f:facet>
+							#{candidate.cpf}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Curso</f:facet>
+							#{candidate.course.name}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink styleClass="btn btn-sm btn-primary" value="Alterar" >
+								<f:setPropertyActionListener value="#{candidate}" target="#{candidateBeans.candidate}" />
+								<f:ajax execute="@form" render=":cadastro"></f:ajax>
+							</h:commandLink>
+						
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink styleClass="btn btn-sm btn-danger text-center" action="#{candidateBeans.delete(candidate)}" value="Remover">
+								<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+							</h:commandLink>
+						</p:column>
+						
+					</h:dataTable>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

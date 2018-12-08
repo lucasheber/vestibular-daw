@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row mt-5"></div>
+
+		<div class="row mt-5">
+			<div class="col-sm-12 col-md-12">
+				<h3 class="text-left">Gabarito</h3>
+				<hr />
+			</div>
+		</div>
+
+		<div class="container">
+			<h:form id="cadastro">
+
+				<div class="form-group col-md-6">
+					<label for="birthday">Sequência</label>
+					<p:inputTextarea styleClass="form-control" value="#{answerTestBeans.answers}"></p:inputTextarea>
+				</div>
+				
+				<h:commandButton value="Cadastrar" class="btn btn-primary mt-3" action="#{answerTestBeans.register}"></h:commandButton>
+				
+			</h:form>
+		</div>
+		
+		<div class="col mt-5">
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

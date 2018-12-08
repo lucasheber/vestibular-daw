@@ -32,23 +32,27 @@ public class CandidateBeans {
 	// Chamado ao clicar no botao cadastrar
 	public void register () {
 		
-		if(candidate.getId() == null) {
-			Course course = daoCourse.searchById(idCourse);
-			
-			candidate.setCourse(course);
-
-			if (course.getNumVacancy() - course.getTotalSubscribers() > 0) {
-				dao.insert(candidate);
-				
-				course.setTotalSubscribers(course.getTotalSubscribers() + 1);
-				
-				daoCourse.update(course);
-				
-				setCandidate(new Candidate());
-			}
-		} else {
-			dao.update(candidate);
-		}
+		System.out.println(candidate);
+		
+		return;
+//		if(candidate.getId() == null) {
+//			
+//			Course course = daoCourse.searchById(idCourse);
+//			
+//			candidate.setCourse(course);
+//
+//			if (course.getNumVacancy() - course.getTotalSubscribers() > 0) {
+//				dao.insert(candidate);
+//				
+//				course.setTotalSubscribers(course.getTotalSubscribers() + 1);
+//				
+//				daoCourse.update(course);
+//				
+//				setCandidate(new Candidate());
+//			}
+//		} else {
+//			dao.update(candidate);
+//		}
 	}// register
 	
 	// Chamado ao clicar no botao remover

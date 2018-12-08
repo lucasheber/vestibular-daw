@@ -6,7 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import lhos.jompscity.vestibular.dao.DAO;
-import lhos.jompscity.vestibular.model.Candidate;
 import lhos.jompscity.vestibular.model.Course;
 
 @ViewScoped

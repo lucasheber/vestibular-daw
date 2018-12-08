@@ -11,7 +11,7 @@ public class AnswerTest {
 
 	@Id
 	@GeneratedValue(generator="answer_id", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="answer_id", sequenceName="answer_seq")
+	@SequenceGenerator(name="answer_id", sequenceName="answer_seq", allocationSize=1)
 	private Long id;
 	
 	private Integer question;

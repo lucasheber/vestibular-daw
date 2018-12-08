@@ -12,7 +12,7 @@ public class Result {
 	
 	@Id
 	@GeneratedValue(generator="result_id", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="result_id", sequenceName="result_seq")
+	@SequenceGenerator(name="result_id", sequenceName="result_seq", allocationSize=1)
 	private Long id;
 	
 	@ManyToOne

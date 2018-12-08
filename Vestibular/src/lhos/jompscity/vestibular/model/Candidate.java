@@ -24,7 +24,7 @@ public class Candidate {
 
 	@Id
 	@GeneratedValue(generator="candidate_id", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="candidate_id", sequenceName="candidate_seq")
+	@SequenceGenerator(name="candidate_id", sequenceName="candidate_seq", allocationSize=1)
 	private Long id;
 	
 	@Column(unique=true)
@@ -41,7 +41,7 @@ public class Candidate {
 	
 	private String birthdayStr;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private Address address = new Address();
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)

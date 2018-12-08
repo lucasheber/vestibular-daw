@@ -1,5 +1,6 @@
 package lhos.jompscity.vestibular.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,12 +16,12 @@ public class Classroom {
 
 	@Id
 	@GeneratedValue(generator="classroom_id", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="classroom_id", sequenceName="classroom_seq")
+	@SequenceGenerator(name="classroom_id", sequenceName="classroom_seq", allocationSize=1)
 	private Long id;
 
 	private Integer capacity;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private Course course;
 
 	public Classroom() {}

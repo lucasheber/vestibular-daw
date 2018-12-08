@@ -18,7 +18,7 @@ public class Course {
 	
 	@Id
 	@GeneratedValue(generator="course_id", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="course_id", sequenceName="course_seq")
+	@SequenceGenerator(name="course_id", sequenceName="course_seq", allocationSize=1)
 	private Long id;
 	
 	@Column(unique=true)
@@ -32,10 +32,10 @@ public class Course {
 	
 	private Integer totalSubscribers; 
 	
-	@OneToMany(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY, mappedBy="course")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="course")
 	private List<Candidate> candidates = new ArrayList<Candidate>();
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="course")
 	private List<Classroom> classrooms = new ArrayList<Classroom>();
 
 	public Course() {}

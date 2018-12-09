@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row mt-5"></div>
+
+		<div class="row mt-5">
+			<div class="col-sm-12 col-md-12">
+				<h3 class="text-left">Consulta Por Código</h3>
+				<hr />
+			</div>
+		</div>
+		
+		<h:messages styleClass="alert alert-danger mt-3 mb-3"/>
+
+		<div class="container">
+			<h:form id="cadastro">
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="birthday">Curso</label>
+						<h:selectOneMenu styleClass="form-control" value="#{candidateBeans.idCourse}">
+							<f:selectItems value="#{courseBeans.courses}" var="course" itemValue="#{course.id}" itemLabel="#{course.name}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<h:commandButton value="Pesquisar" class="btn btn-primary mt-3" action="#{candidateBeans.searchByCod}">
+				
+				</h:commandButton>
+			</h:form>
+		</div>
+		
+		<div class="col mt-5">
+			<h:form id="lista">
+				<fieldset>
+					<h:dataTable id="listaTable" styleClass="table" value="#{candidateBeans.candidates}" var="candidate">
+						
+						<p:column>
+							<f:facet name="header">N° Inscrição</f:facet>
+							#{candidate.registrationNumber}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							#{candidate.name}
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">CPF</f:facet>
+							#{candidate.cpf}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Curso</f:facet>
+							#{candidate.course.name}
+						</p:column>
+					</h:dataTable>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

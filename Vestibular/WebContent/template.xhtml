@@ -10,9 +10,15 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<h:outputStylesheet name="css/bootstrap.min.css"></h:outputStylesheet>
-	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
-
+	<h:outputScript name="jquery/jquery-3.3.1.min.js"></h:outputScript>
+	
+	<h:outputStylesheet name="bootstrap/css/bootstrap.min.css"></h:outputStylesheet>
+	<h:outputScript name="bootstrap/js/bootstrap.min.js"></h:outputScript>
+	
+	<h:outputStylesheet name="datatable/DataTables/datatables.min.css"></h:outputStylesheet>
+	<h:outputScript name="datatable/DataTables/datatables.min.js"></h:outputScript>
+	
+	<h:outputScript name="main/main.js"></h:outputScript>
 	<title>Vestibular .:: Jomps City</title>
 
 <style type="text/css">
@@ -46,6 +52,19 @@
 			<li class="nav-item"><a class="nav-link" href="/Vestibular/maintenace/classroom">Salas</a></li>
 			<li class="nav-item"><a class="nav-link" href="/Vestibular/maintenace/classroom/distribuir.xhtml">Distribuir Sala</a></li>
 			<li class="nav-item"><a class="nav-link" href="/Vestibular/maintenace/result">Gabarito</a></li>
+			
+			 <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Consulta
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="#">Candidato p/ Inscrição</a>
+		          <a class="dropdown-item" href="/Vestibular/maintenace/candidate/searchByCourse.xhtml">Candidato p/ Curso</a>
+		          <a class="dropdown-item" href="#">Curso</a>
+		          <a class="dropdown-item" href="#">Sala</a>
+		          <a class="dropdown-item" href="#">Gabarito</a>
+		        </div>
+		      </li>
 		</ul>
 	</div>
 	</nav>

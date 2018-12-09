@@ -26,6 +26,9 @@ public class ClassroomBeans {
 	private Long idClass;
 	private Long idCandidate;
 	
+	private Boolean status = null;
+	private String message = "";
+	
 	public void register() {
 		
 		if (classroom.getId() == null) {
@@ -67,7 +70,7 @@ public class ClassroomBeans {
 		entityManager.getTransaction().commit();
 		entityManager.close();
 		
-		System.out.println("## UPDATE " + result);
+		// System.out.println("## UPDATE " + result);
 	}
 	
 	public void distribute () {
@@ -75,13 +78,15 @@ public class ClassroomBeans {
 		Candidate candidate = daoCandidate.searchById(idCandidate);
 		
 		if (candidate.getCodClassroom() != null) {
-			System.out.println("Já cadastrado!");
+			this.status = false;
+			this.message = "O candidato já possui um curso cadastrado!";
 			
 			return;
 		}
 		
 		if (candidate.getCourse().getId() != classroom.getCourse().getId()) {
-			System.out.println("## Curso diferente!");
+			this.status = false;
+			this.message = "O curso do candidato é diferente do curso da sala!";
 			
 		} else {
 			
@@ -90,7 +95,9 @@ public class ClassroomBeans {
 			
 			dao.update(classroom);
 			daoCandidate.update(candidate);
-	
+			
+			this.status = true;
+			this.message = "Distribção feita com sucesso!";
 		}
 	}
 	
@@ -136,5 +143,21 @@ public class ClassroomBeans {
 
 	public void setIdCandidate(Long idCandidate) {
 		this.idCandidate = idCandidate;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

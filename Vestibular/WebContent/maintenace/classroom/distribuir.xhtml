@@ -17,7 +17,19 @@
 				<hr />
 			</div>
 		</div>
-
+		<h:panelGrid id="statusMessage">
+			<h:panelGrid  styleClass="mt-3 mb-3" rendered="#{classroomBeans.status != null and classroomBeans.status == false}">
+				<div class="col">
+					<h:outputText value="#{classroomBeans.message}" class="alert alert-danger" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+			
+			<h:panelGrid styleClass="mt-3 mb-3"  rendered="#{classroomBeans.status != null and classroomBeans.status == true}">
+				<div class="col">
+					<h:outputText value="#{classroomBeans.message}" class="alert alert-success" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+		</h:panelGrid>
 		<div class="container">
 			<h:form id="cadastro">
 				<div class="form-group col-md-4">
@@ -38,7 +50,7 @@
 				<div class="form-group col-md-4 mt-5">
 					<h:commandButton styleClass="btn btn-success  btn-block" value="Cadastrar"
 						action="#{classroomBeans.distribute}">
-						<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+						<f:ajax execute="@form" render=":cadastro :lista :statusMessage"></f:ajax>
 					</h:commandButton>
 				</div>
 				
@@ -65,23 +77,6 @@
 							<f:facet name="header">Curso</f:facet>
 							#{classroom.course.name}
 						</p:column>
-						
-						<p:column>
-							<f:facet name="header">Alterar</f:facet>
-							<h:commandLink styleClass="btn btn-sm btn-primary" value="Alterar" >
-								<f:setPropertyActionListener value="#{classroom}" target="#{classroomBeans.classroom}" />
-								<f:ajax execute="@form" render=":cadastro"></f:ajax>
-							</h:commandLink>
-						
-						</p:column>
-						
-						<p:column>
-							<f:facet name="header">Remover</f:facet>
-							<h:commandLink styleClass="btn btn-sm btn-danger text-center" action="#{classroomBeans.delete(classroom)}" value="Remover">
-								<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
-							</h:commandLink>
-						</p:column>
-						
 					</h:dataTable>
 				</fieldset>
 			</h:form>

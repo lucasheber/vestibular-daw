@@ -1,8 +1,6 @@
 package lhos.jompscity.vestibular.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +19,7 @@ public class Classroom {
 
 	private Integer capacity;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne
 	private Course course;
 
 	public Classroom() {}

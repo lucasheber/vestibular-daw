@@ -18,6 +18,20 @@
 			</div>
 		</div>
 
+		<h:panelGrid id="statusMessage">
+			<h:panelGrid  styleClass="mt-3 mb-3" rendered="#{courseBeans.status != null and courseBeans.status == false}">
+				<div class="col">
+					<h:outputText value="#{courseBeans.message}" class="alert alert-danger" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+			
+			<h:panelGrid styleClass="mt-3 mb-3"  rendered="#{courseBeans.status != null and courseBeans.status == true}">
+				<div class="col">
+					<h:outputText value="#{courseBeans.message}" class="alert alert-success" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+		</h:panelGrid>
+	
 		<div class="col">
 			<h:form id="cadastro">
 				<div class="form-group col-md-4">
@@ -34,16 +48,15 @@
 
 				<div class="form-group col-md-4">
 					<label for="vagas">Qtd. Vagas</label>
-					<p:inputNumber
-						style="padding: 0; border: none; width: 100%; display: inline-grid;"
-						styleClass="form-control" id="vagas"
-						value="#{courseBeans.course.numVacancy}" />
+					<h:inputText styleClass="form-control" validatorMessage="Forneça um valor positivo" id="vagas" value="#{courseBeans.course.numVacancy}">
+						<f:validateLongRange minimum="1"></f:validateLongRange>
+					</h:inputText>
 				</div>
 
 				<div class="form-group col-md-4 mt-5">
 					<h:commandButton class="btn btn-success btn-block"
 						value="Cadastrar" action="#{courseBeans.register}">
-						<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+						<f:ajax execute="@form" render=":cadastro :lista :statusMessage"></f:ajax>
 					</h:commandButton>
 				</div>
 			</h:form>
@@ -78,7 +91,7 @@
 							<f:facet name="header">Alterar</f:facet>
 							<h:commandLink styleClass="btn btn-sm btn-primary" value="Alterar" >
 								<f:setPropertyActionListener value="#{course}" target="#{courseBeans.course}" />
-								<f:ajax execute="@form" render=":cadastro"></f:ajax>
+								<f:ajax execute="@form" render=":cadastro :statusMessage"></f:ajax>
 							</h:commandLink>
 						
 						</p:column>
@@ -86,7 +99,7 @@
 						<p:column>
 							<f:facet name="header">Remover</f:facet>
 							<h:commandLink styleClass="btn btn-sm btn-danger text-center" action="#{courseBeans.delete(course)}" value="Remover">
-								<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+								<f:ajax execute="@form" render=":cadastro :lista :statusMessage"></f:ajax>
 							</h:commandLink>
 						</p:column>
 					</h:dataTable>

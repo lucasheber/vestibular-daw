@@ -20,6 +20,7 @@ public class ClassroomBeans {
 	
 	public void register() {
 		
+		System.out.println(idCourse);
 		if (classroom.getId() == null) {
 			DAO<Course> daoCourse = new DAO<>(Course.class);
 			Course course = daoCourse.searchById(idCourse);

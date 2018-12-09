@@ -17,6 +17,8 @@
 				<hr />
 			</div>
 		</div>
+		
+		<h:messages styleClass="alert alert-danger mt-3 mb-3"/>
 
 		<div class="container">
 			<h:form id="cadastro">
@@ -57,22 +59,22 @@
 					<div class="form-group col-md-4">
 						<label for="city">Cidade</label>
 						<p:inputText styleClass="form-control" id="city"
-							value="#{candidateBeans.candidate.address.city}" />
+							value="#{candidateBeans.candidate.city}" />
 					</div>
 					<div class="form-group col-md-4">
 						<label for="bairro">Bairro</label>
 						<p:inputText styleClass="form-control" id="bairro"
-							value="#{candidateBeans.candidate.address.neighborhood}" />
+							value="#{candidateBeans.candidate.neighborhood}" />
 					</div>
 					<div class="form-group col-md-2">
 						<label for="estado">Estado</label>
 						<p:inputMask styleClass="form-control" id="estado" mask="AZ"
-							value="#{candidateBeans.candidate.address.state}" />
+							value="#{candidateBeans.candidate.state}" />
 					</div>
 					<div class="form-group col-md-2">
 						<label for="cep">CEP</label>
 						<p:inputMask styleClass="form-control" id="cep" mask="99999-999"
-							value="#{candidateBeans.candidate.address.cep}" />
+							value="#{candidateBeans.candidate.cep}" />
 					</div>
 
 				</div>
@@ -81,17 +83,17 @@
 					<div class="form-group col-md-4">
 						<label for="rua">Rua</label>
 						<p:inputText styleClass="form-control"
-							value="#{candidateBeans.candidate.address.street}" />
+							value="#{candidateBeans.candidate.street}" />
 					</div>
 					<div class="form-group col-md-4">
 						<label for="complemento">Complemento</label>
 						<p:inputText styleClass="form-control" id="complemento"
-							value="#{candidateBeans.candidate.address.complement}" />
+							value="#{candidateBeans.candidate.complement}" />
 					</div>
 					<div class="form-group col-md-2">
 						<label for="number">Número</label>
 						<p:inputNumber id="number"
-							value="#{candidateBeans.candidate.address.number}" />
+							value="#{candidateBeans.candidate.numberHouse}" />
 					</div>
 				</div>
 

@@ -6,15 +6,11 @@ import javax.persistence.Persistence;
 
 public class Connection {
 
-	private static EntityManager entityManager;
+//	private static EntityManager entityManager;
 	private static EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("vestibular");;
 	
 	public EntityManager getEntityManager() {
-
-//		if (managerFactory != null && managerFactory.isOpen())
-			entityManager = managerFactory.createEntityManager();
-		
-		return entityManager;
+		return managerFactory.createEntityManager();
 	}
 
 }

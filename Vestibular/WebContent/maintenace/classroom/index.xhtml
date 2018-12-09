@@ -20,13 +20,6 @@
 
 		<div class="container">
 			<h:form id="cadastro">
-
-				<div class="form-group col-md-4">
-					<label for="nome">Código</label>
-					<p:inputText readonly="true" styleClass="form-control" id="nome"
-						value="#{classroomBeans.classroom.codeClass}" placeholder="Será gerado automaticamente." />
-				</div>
-
 				<div class="form-group col-md-4">
 					<label for="birthday">Curso</label>
 					<h:selectOneMenu styleClass="form-control" value="#{classroomBeans.idCourse}">
@@ -36,8 +29,9 @@
 
 				<div class="form-group col-md-4">
 					<label for="capacidade">Capacidade</label>
-					<p:inputNumber style="padding: 0; border: none; width: 100%; display: inline-grid;"
-						id="capacidade" value="#{classroomBeans.classroom.capacity}" />
+					<h:inputText styleClass="form-control" required="true" validatorMessage="Forneça um valor positivo" id="capacidade" value="#{classroomBeans.classroom.capacity}">
+						<f:validateLongRange minimum="1"></f:validateLongRange>
+					</h:inputText>
 				</div>
 
 				<div class="form-group col-md-4 mt-5">
@@ -46,7 +40,8 @@
 						<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
 					</h:commandButton>
 				</div>
-
+				
+				<h:message for="capacidade" style="color:red" />
 			</h:form>
 		</div>
 		

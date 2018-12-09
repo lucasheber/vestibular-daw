@@ -11,6 +11,7 @@ public class DAO<T> {
 	private EntityManager entityManager;
 	
 	public DAO(Class<T> classe) {
+		
 		this.classe = classe;
 	}
 	

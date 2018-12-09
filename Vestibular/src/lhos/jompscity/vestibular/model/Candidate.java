@@ -12,7 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
@@ -34,7 +33,6 @@ public class Candidate {
 	private String cpf;
 	
 	@NotEmpty(message="O campo nome não pode ficar vazio!")
-	@Min(value=2, message="O Nome deve possui mais de dois caracteres!")
 	private String name;
 	
 	@Temporal(TemporalType.DATE)
@@ -63,6 +61,8 @@ public class Candidate {
 	
 	@NotEmpty(message="Forneca o CEP")
 	private String cep;
+	
+	private String codClassroom;
 	
 	private String complement;
 	
@@ -200,14 +200,11 @@ public class Candidate {
 		this.complement = complement;
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"Candidate [id=%s, registrationNumber=%s, cpf=%s, name=%s, birthday=%s, birthdayStr=%s, answer=%s, score=%s]",
-				id, registrationNumber, cpf, name, birthday, birthdayStr, answer, score);
+	public String getCodClassroom() {
+		return codClassroom;
 	}
 
-	
-	
-	
+	public void setCodClassroom(String codClassroom) {
+		this.codClassroom = codClassroom;
+	}
 }

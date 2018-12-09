@@ -19,7 +19,6 @@ public class CandidateBeans {
 	private Long idCourse;
 	private Integer vacancy;
 
-	
 	public CandidateBeans() {
 		
 		if (candidate.getId() != null) {

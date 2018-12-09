@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row mt-5"></div>
+
+		<div class="row mt-5">
+			<div class="col-sm-12 col-md-12">
+				<h3 class="text-left">Distribuir Sala</h3>
+				<hr />
+			</div>
+		</div>
+
+		<div class="container">
+			<h:form id="cadastro">
+				<div class="form-group col-md-4">
+					<label for="birthday">Sala</label>
+					<h:selectOneMenu styleClass="form-control" value="#{classroomBeans.idClass}">
+						<f:selectItems value="#{classroomBeans.classrooms}" var="classroom" itemValue="#{classroom.id}" itemLabel="#{classroom.codeClass}" />
+					</h:selectOneMenu>
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="birthday">Candidato</label>
+					<h:selectOneMenu styleClass="form-control" value="#{classroomBeans.idCandidate}">
+						<f:selectItems value="#{candidateBeans.candidates}" var="candidate" itemValue="#{candidate.id}" itemLabel="#{candidate.name}" />
+					</h:selectOneMenu>
+				</div>
+
+			
+				<div class="form-group col-md-4 mt-5">
+					<h:commandButton styleClass="btn btn-success  btn-block" value="Cadastrar"
+						action="#{classroomBeans.distribute}">
+						<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+					</h:commandButton>
+				</div>
+				
+				<h:message for="capacidade" style="color:red" />
+			</h:form>
+		</div>
+		
+		<div class="col mt-5">
+			<h:form id="lista">
+				<fieldset>
+					<h:dataTable styleClass="table" value="#{classroomBeans.classrooms}" var="classroom">
+
+						<p:column>
+							<f:facet name="header">Código</f:facet>
+							#{classroom.codeClass}
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Capacidade</f:facet>
+							#{classroom.capacity}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Curso</f:facet>
+							#{classroom.course.name}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Alterar</f:facet>
+							<h:commandLink styleClass="btn btn-sm btn-primary" value="Alterar" >
+								<f:setPropertyActionListener value="#{classroom}" target="#{classroomBeans.classroom}" />
+								<f:ajax execute="@form" render=":cadastro"></f:ajax>
+							</h:commandLink>
+						
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Remover</f:facet>
+							<h:commandLink styleClass="btn btn-sm btn-danger text-center" action="#{classroomBeans.delete(classroom)}" value="Remover">
+								<f:ajax execute="@form" render=":cadastro :lista"></f:ajax>
+							</h:commandLink>
+						</p:column>
+						
+					</h:dataTable>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

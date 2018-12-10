@@ -55,6 +55,7 @@ public class ClassroomBeans {
 		
 	} // delete
 	
+	// Atualiza todos dos candidatos com o codClass passado para null
 	private void updateCandidates(String codClass) {
 		EntityManager entityManager = new Connection().getEntityManager(); 
 		
@@ -70,7 +71,8 @@ public class ClassroomBeans {
 		entityManager.getTransaction().commit();
 		entityManager.close();
 		
-		// System.out.println("## UPDATE " + result);
+		if (result == 1)
+		 System.out.println("## UPDATE " + result);
 	}
 	
 	public void distribute () {
@@ -99,7 +101,7 @@ public class ClassroomBeans {
 			this.status = true;
 			this.message = "Distribção feita com sucesso!";
 		}
-	}
+	}// distribute
 	
 	public List<Classroom> getClassrooms() {
 		return dao.list();

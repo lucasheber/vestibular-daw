@@ -13,7 +13,7 @@
 
 		<div class="row mt-5">
 			<div class="col-sm-12 col-md-12">
-				<h3 class="text-left">Consulta Por Código</h3>
+				<h3 class="text-left">Consulta Por Inscrição</h3>
 				<hr />
 			</div>
 		</div>
@@ -24,14 +24,12 @@
 			<h:form id="cadastro">
 				<div class="form-row">
 					<div class="form-group col-md-4">
-						<label for="birthday">Curso</label>
-						<h:selectOneMenu styleClass="form-control" value="#{candidateBeans.idCourse}">
-							<f:selectItems value="#{courseBeans.courses}" var="course" itemValue="#{course.id}" itemLabel="#{course.name}" />
-						</h:selectOneMenu>
+						<label for="birthday">N° Inscrição</label>
+						<p:inputText styleClass="form-control" value="#{candidateBeans.numInscricao}"/>
 					</div>
 				</div>
 				<h:commandButton value="Pesquisar" class="btn btn-primary mt-3" action="#{candidateBeans.searchByCod}">
-				
+					<f:ajax execute="@form" render=":lista"></f:ajax>
 				</h:commandButton>
 			</h:form>
 		</div>
@@ -39,8 +37,7 @@
 		<div class="col mt-5">
 			<h:form id="lista">
 				<fieldset>
-					<h:dataTable id="listaTable" styleClass="table" value="#{candidateBeans.candidates}" var="candidate">
-						
+					<h:dataTable id="listaTable" styleClass="table" value="#{candidateBeans.candidatesByCourse}" var="candidate">
 						<p:column>
 							<f:facet name="header">N° Inscrição</f:facet>
 							#{candidate.registrationNumber}

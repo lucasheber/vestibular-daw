@@ -46,6 +46,25 @@
 		</div>
 		
 		<div class="col mt-5">
+			<h:form>
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						<label for="search">Questão</label>
+						<p:inputText styleClass="form-control" value="#{answerTestBeans.question}"/>
+					</div>
+						
+					<div class="form-group col-md-2">
+						<label class="text-white">Vazio</label>
+						<h:commandButton action="#{answerTestBeans.searchBy}" styleClass="btn btn-success btn-block" value="Pesquisar">
+							<f:ajax execute="@form" render=":resp"></f:ajax>
+						</h:commandButton>
+					</div>
+				</div>
+			</h:form>
+			
+			<h:panelGrid id="resp">
+				<h:outputText value="#{answerTestBeans.answer}"/>
+			</h:panelGrid>
 		</div>
 	</ui:define>
 </ui:composition>

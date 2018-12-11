@@ -1,5 +1,6 @@
 package lhos.jompscity.vestibular.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -14,9 +15,10 @@ public class CourseBeans {
 
 	private Course course = new Course();
 	private DAO<Course> dao = new DAO<>(Course.class);
-	
+	private List<Course> courses = new ArrayList<>();
 	private Boolean status = null;
 	private String message = "";
+	private String search = "";
 	
 	// Chamado ao clicar no botao cadastrar.
 	public void register() {
@@ -27,11 +29,11 @@ public class CourseBeans {
 	
 			if (result) {
 				course = new Course();
-				setMessage("Cadastro realizado com sucesso!");
-				setStatus(true);
+				message = "Cadastro realizado com sucesso!";
+				status = true;
 			} else {
-				setMessage("Ocorreu um erro na inserção dos dados!");
-				setStatus(false);
+				message = "Ocorreu um erro na inserção dos dados!";
+				status = false;
 			}
 			
 		} else {
@@ -44,11 +46,15 @@ public class CourseBeans {
 		boolean removed = dao.remove(course);
 		
 		if (removed) {
-			setMessage("Curso removido com sucesso!");
-			setStatus(true);
+			message = "Curso removido com sucesso!";
+			status = true;
 		}
 	} // delete
 
+	public void searchBy () {
+	
+	}
+	
 	public Course getCourse() {
 		return course;
 	}
@@ -59,23 +65,32 @@ public class CourseBeans {
 
 	public List<Course> getCourses() {
 		DAO<Course> dao = new DAO<>(Course.class);
-
-		return dao.list();
+		courses.clear();
+		
+		if (search != null && !search.isEmpty()) {
+			for (Course course : dao.list())
+				if (course.getCodeCourse().equalsIgnoreCase(search))
+					courses.add(course);
+		} else {
+			courses = dao.list();
+		}
+		
+		return courses ;
 	}
 
 	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
-
 	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 }

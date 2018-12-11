@@ -39,6 +39,7 @@ public class Candidate implements Comparable<Candidate> {
 	@Temporal(TemporalType.DATE)
 	private Calendar birthday = Calendar.getInstance(); 
 	
+	@NotEmpty(message="Preencha a data")
 	private String birthdayStr;
 	
 	@ManyToOne

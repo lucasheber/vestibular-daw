@@ -39,7 +39,7 @@ public class CandidateBeans {
 	// Chamado ao clicar no botao cadastrar
 	public void register () {
 		
-		if (idCourse == null || idCourse == 0) {
+		if (idCourse == null || idCourse == 0 && candidate.getId() == null) {
 			status = false;
 			message = "Selecione um curso ou cadastre um antes!";
 			
@@ -65,9 +65,15 @@ public class CandidateBeans {
 				message = "O curso já atingiu o número de vagas!";
 			}
 		} else {
-			dao.update(candidate);
-			status = true;
-			message = "Candidato alterado com sucesso!";
+			
+			if (candidate.getCourse().getId() != idCourse) {
+				status = false;
+				message = "O curso do candidato não poder ser alterado!";
+			} else {
+				dao.update(candidate);
+				status = true;
+				message = "Candidato alterado com sucesso!";
+			}
 		}
 	}// register
 	

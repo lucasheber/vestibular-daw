@@ -23,10 +23,13 @@ public class AnswerTestBeans {
 	private Boolean status = null;
 	private String message = "";
 	
+	private String answer;
+	private Long question;
+	
 	public void register () {
 		
 		boolean isValid = true;
-		
+	
 		if (answers.length() != 50) {
 			status = false;
 			message = "O gabarito deve conter 50 valores!";
@@ -62,6 +65,12 @@ public class AnswerTestBeans {
 			
 			answers = "";
 		}
+	}// register
+	
+	public void searchBy () {
+		if (question > 0 && question <= 50)
+			answer = "Resposta: " + dao.searchById(question).getAnswer();
+		else answer = "O valor passado é inválido";
 	}
 	
 	public String getAnswers() {
@@ -86,5 +95,21 @@ public class AnswerTestBeans {
 
 	public String getMessage() {
 		return message;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public Long getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Long question) {
+		this.question = question;
 	}
 }

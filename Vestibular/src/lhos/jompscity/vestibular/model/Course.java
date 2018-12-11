@@ -49,7 +49,7 @@ public class Course {
 	}
 
 	public String getCodeCourse() {
-		return codeCourse;
+		return codeCourse = String.format("%s%05d", getInitials(), getId());
 	}
 
 	public void setCodeCourse(String codeCourse) {

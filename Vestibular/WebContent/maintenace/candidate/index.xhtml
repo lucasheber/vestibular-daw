@@ -38,8 +38,8 @@
 			<h:form id="cadastro">
 				<div class="form-row">
 					<div class="form-group col-md-4">
-						<label for="birthday">Curso</label>
-						<h:selectOneMenu styleClass="form-control" value="#{candidateBeans.idCourse}">
+						<label for="curso">Curso</label>
+						<h:selectOneMenu  styleClass="form-control" value="#{candidateBeans.idCourse}">
 							<f:selectItem itemLabel="-- Escolha um curso -- " itemValue="0"/>
 							<f:selectItems value="#{courseBeans.courses}" var="course" itemValue="#{course.id}" itemLabel="#{course.name}" />
 							<f:ajax event="change" listener="#{candidateBeans.numVacancy}" process="@form" render="vacancy" />
@@ -106,8 +106,7 @@
 					</div>
 					<div class="form-group col-md-2">
 						<label for="number">Número</label>
-						<p:inputNumber id="number"
-							value="#{candidateBeans.candidate.numberHouse}" />
+						<p:inputText id="number" value="#{candidateBeans.candidate.numberHouse}" />
 					</div>
 				</div>
 

@@ -137,7 +137,12 @@ public class CandidateBeans {
 	}
 	
 	public List<Candidate> getCandidates() {
-		return dao.list();
+		List<Candidate> list = dao.list();
+		
+		if (list != null)
+			list.sort(null);
+		
+		return list;
 	}
 	
 	public List<Candidate> getCandidatesByCourse() {

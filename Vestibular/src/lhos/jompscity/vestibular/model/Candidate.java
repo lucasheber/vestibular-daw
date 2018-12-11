@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 @Entity(name="Cadidates")
 @Table(name="cadidates")
-public class Candidate {
+public class Candidate implements Comparable<Candidate> {
 
 	@Id
 	@GeneratedValue(generator="candidate_id", strategy=GenerationType.SEQUENCE)
@@ -206,5 +206,10 @@ public class Candidate {
 
 	public void setCodClassroom(String codClassroom) {
 		this.codClassroom = codClassroom;
+	}
+
+	@Override
+	public int compareTo(Candidate anotherCandidate) {
+		return name.compareToIgnoreCase(anotherCandidate.name);
 	}
 }

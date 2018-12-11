@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row mt-5"></div>
+
+		<div class="row mt-5">
+			<div class="col-sm-12 col-md-12">
+				<h3 class="text-left">Todos os candidatos</h3>
+				<hr />
+			</div>
+		</div>
+
+		<div class="col mt-5">
+			<h:form id="lista">
+				<fieldset>
+					<h:dataTable styleClass="table" value="#{candidateBeans.candidates}" var="candidate">
+						<p:column>
+							<f:facet name="header">Inscrição</f:facet>
+							#{candidate.registrationNumber}
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							#{candidate.name}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Data de Nascimento</f:facet>
+							#{candidate.birthdayStr}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Nome do curso</f:facet>
+							#{candidate.course.name}
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Colocação</f:facet>
+							<c:choose>
+								<c:when test="#{not empty candidate.score}">
+									${candidate.course.candidatesByScore.indexOf(candidate)-1}
+								</c:when>
+								<c:otherwise>
+									PENDENTE
+								</c:otherwise>
+							</c:choose>
+						</p:column>					
+					</h:dataTable>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

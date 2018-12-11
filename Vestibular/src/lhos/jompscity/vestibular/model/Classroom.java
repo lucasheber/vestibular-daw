@@ -1,10 +1,15 @@
 package lhos.jompscity.vestibular.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,6 +26,9 @@ public class Classroom {
 	
 	@ManyToOne
 	private Course course;
+	
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="classroom")
+	private List<Candidate> candidates = new ArrayList<Candidate>();
 
 	public Classroom() {}
 
@@ -50,5 +58,13 @@ public class Classroom {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+	
+	public List<Candidate> getCandidates() {
+		return candidates;
+	}
+	
+	public void setCandidates(List<Candidate> candidates) {
+		this.candidates = candidates;
 	}
 }

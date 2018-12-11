@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -42,6 +43,12 @@ public class Candidate implements Comparable<Candidate> {
 	
 	@ManyToOne
 	private Course course;
+	
+	@ManyToOne
+	private Classroom classroom;
+	
+	@OneToOne
+	private Result result;
 
 	private String answer;
 	
@@ -62,11 +69,7 @@ public class Candidate implements Comparable<Candidate> {
 	@NotEmpty(message="Forneca o CEP")
 	private String cep;
 	
-	private String codClassroom;
-	
 	private String complement;
-	
-	private Integer score;
 
 	public Candidate() {}
 
@@ -127,6 +130,18 @@ public class Candidate implements Comparable<Candidate> {
 		this.course = course;
 	}
 
+	public Classroom getClassroom() {
+		return classroom;
+	}
+	
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
+	
+	public Result getResult() {
+		return result;
+	}
+	
 	public String getAnswer() {
 		return answer;
 	}
@@ -134,15 +149,6 @@ public class Candidate implements Comparable<Candidate> {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-
-	public Integer getScore() {
-		return score;
-	}
-
-	public void setScore(Integer score) {
-		this.score = score;
-	}
-
 	
 	public String getStreet() {
 		return street;
@@ -198,14 +204,6 @@ public class Candidate implements Comparable<Candidate> {
 
 	public void setComplement(String complement) {
 		this.complement = complement;
-	}
-
-	public String getCodClassroom() {
-		return codClassroom;
-	}
-
-	public void setCodClassroom(String codClassroom) {
-		this.codClassroom = codClassroom;
 	}
 
 	@Override

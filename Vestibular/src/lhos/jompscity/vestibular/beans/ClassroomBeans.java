@@ -87,7 +87,7 @@ public class ClassroomBeans {
 		Classroom classroom = dao.searchById(idClass);
 		Candidate candidate = daoCandidate.searchById(idCandidate);
 		
-		if (candidate.getCodClassroom() != null) {
+		if (candidate.getClassroom() != null) {
 			this.status = false;
 			this.message = "O candidato já possui uma sala cadastrada!";
 			
@@ -99,9 +99,8 @@ public class ClassroomBeans {
 			this.message = "O curso do candidato é diferente do curso da sala!";
 			
 		} else if ( classroom.getCapacity() > 0){
-			
-			candidate.setCodClassroom(classroom.getCodeClass());
 			classroom.setCapacity(classroom.getCapacity() - 1);
+			candidate.setClassroom(classroom);
 			
 			dao.update(classroom);
 			daoCandidate.update(candidate);

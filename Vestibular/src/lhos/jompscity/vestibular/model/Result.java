@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity(name="results")
@@ -15,7 +15,7 @@ public class Result {
 	@SequenceGenerator(name="result_id", sequenceName="result_seq", allocationSize=1)
 	private Long id;
 	
-	@ManyToOne
+	@OneToOne
 	private Candidate candidate;
 	
 	private Integer hits;

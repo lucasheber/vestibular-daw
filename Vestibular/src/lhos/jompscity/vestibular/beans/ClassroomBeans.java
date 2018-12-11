@@ -1,5 +1,6 @@
 package lhos.jompscity.vestibular.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -28,6 +29,7 @@ public class ClassroomBeans {
 	
 	private Boolean status = null;
 	private String message = "";
+	private String search = "";
 	
 	public void register() {
 		
@@ -115,7 +117,19 @@ public class ClassroomBeans {
 	}// distribute
 	
 	public List<Classroom> getClassrooms() {
-		return dao.list();
+		
+		DAO<Classroom> dao = new DAO<>(Classroom.class);
+		List<Classroom> courses = new ArrayList<>();
+		
+		if (search != null && !search.isEmpty()) {
+			for (Classroom classroom : dao.list())
+				if (classroom.getCodeClass().equalsIgnoreCase(search))
+					courses.add(classroom);
+		} else {
+			courses = dao.list();
+		}
+		
+		return courses ;
 	}
 	
 	public Classroom getClassroom() {
@@ -172,5 +186,13 @@ public class ClassroomBeans {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 }

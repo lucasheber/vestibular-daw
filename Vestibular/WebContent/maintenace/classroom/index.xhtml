@@ -46,6 +46,24 @@
 		</div>
 		
 		<div class="col mt-5">
+			<h:form>
+			<div class="form-row">
+				<div class="form-group col-md-2 offset-8">
+					<label for="search">Código</label>
+					<p:inputText styleClass="form-control" value="#{classroomBeans.search}"/>
+				</div>
+					
+				<div class="form-group col-md-2">
+					<label class="text-white">Vazio</label>
+					<h:commandButton styleClass="btn btn-success btn-block" value="Pesquisar">
+						<f:ajax execute="@form" render=":lista "></f:ajax>
+					</h:commandButton>
+				</div>
+				</div>
+			</h:form>
+		</div>
+		
+		<div class="col mt-5">
 			<h:form id="lista">
 				<fieldset>
 					<h:dataTable id="listaTable" styleClass="table" value="#{classroomBeans.classrooms}" var="classroom">

@@ -46,8 +46,8 @@
 						<p:column>
 							<f:facet name="header">Colocação</f:facet>
 							<c:choose>
-								<c:when test="#{not empty candidate.score}">
-									${candidate.course.candidatesByScore.indexOf(candidate)-1}
+								<c:when test="${not empty candidate.result}">
+									${candidate.course.candidatesByScore.indexOf(candidate)+1}
 								</c:when>
 								<c:otherwise>
 									PENDENTE

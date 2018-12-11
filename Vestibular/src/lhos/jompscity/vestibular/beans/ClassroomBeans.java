@@ -20,7 +20,6 @@ public class ClassroomBeans {
 
 	private Classroom classroom = new Classroom();
 	private DAO<Classroom> dao = new DAO<>(Classroom.class);
-//	private DAO<Course> daoCourse = new DAO<>(Course.class);
 	private DAO<Candidate> daoCandidate = new DAO<>(Candidate.class);
 	
 	private Long idCourse;

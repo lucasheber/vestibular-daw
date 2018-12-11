@@ -108,10 +108,8 @@ public class Course {
 		candidates.sort(new Comparator<Candidate>() {
 			@Override
 			public int compare(Candidate candidate, Candidate anotherCandidate) {
-				if (candidate.getResult() == null)
-					return -1;
-				if (anotherCandidate.getResult() == null)
-					return 1;
+				if (candidate.getResult() == null || anotherCandidate.getResult() == null)
+					return 0;
 				if (candidate.getResult().getHits() < anotherCandidate.getResult().getHits())
 					return -1;
 				if (candidate.getResult().getHits() > anotherCandidate.getResult().getHits())

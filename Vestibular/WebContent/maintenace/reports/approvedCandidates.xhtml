@@ -15,7 +15,7 @@
 
 		<div class="row mt-5">
 			<div class="col-sm-12 col-md-12">
-				<h3 class="text-left">Candidatos por Curso</h3>
+				<h3 class="text-left">Aprovados</h3>
 			</div>
 		</div>
 		
@@ -28,7 +28,7 @@
 				</div>
 		
 				<div class="col-sm-12 col-md-12">
-					<h:dataTable styleClass="table" value="#{course.candidatesByScore}" var="candidate">
+					<h:dataTable styleClass="table" value="#{course.candidatesByScore}" var="candidate" rows="#{course.numVacancy}">
 						<p:column>
 							<f:facet name="header">Inscrição</f:facet>
 								#{candidate.registrationNumber}
@@ -54,7 +54,16 @@
 						</p:column>
 					</h:dataTable>
 					<div class="col sm-12">
-						<strong>Total de Candidatos: ${fn:length(course.candidates)}</strong>
+						<strong>Total de aprovados: 
+							<c:choose>
+								<c:when test="#{fn:length(course.candidates) > course.numVacancy}">
+									${course.numVacancy}
+								</c:when>
+								<c:otherwise>
+									${fn:length(course.candidates)}
+								</c:otherwise>
+							</c:choose>
+						</strong>
 					</div>
 				</div>
 			</p:column>

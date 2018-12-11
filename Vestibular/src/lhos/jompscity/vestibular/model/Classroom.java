@@ -61,6 +61,7 @@ public class Classroom {
 	}
 	
 	public List<Candidate> getCandidates() {
+		candidates.sort(null);
 		return candidates;
 	}
 	

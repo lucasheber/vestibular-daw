@@ -1,6 +1,7 @@
 package lhos.jompscity.vestibular.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -101,5 +102,20 @@ public class Course {
 
 	public void setClassrooms(List<Classroom> classrooms) {
 		this.classrooms = classrooms;
+	}
+	
+	public List<Candidate> getCandidatesByScore() {
+		candidates.sort(new Comparator<Candidate>() {
+			@Override
+			public int compare(Candidate candidate, Candidate anotherCandidate) {
+				if (candidate.getScore() < anotherCandidate.getScore())
+					return -1;
+				if (candidate.getScore() > anotherCandidate.getScore())
+					return 1;
+				return 0;
+			}
+		});
+		
+		return candidates;
 	}
 }

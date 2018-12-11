@@ -76,12 +76,20 @@ public class ClassroomBeans {
 	}
 	
 	public void distribute () {
+		
+		if (idClass == null || idClass == 0) {
+			this.status = false;
+			this.message = "Escolha uma sala ou cadastre uma!";
+			
+			return;
+		}
+		
 		Classroom classroom = dao.searchById(idClass);
 		Candidate candidate = daoCandidate.searchById(idCandidate);
 		
 		if (candidate.getCodClassroom() != null) {
 			this.status = false;
-			this.message = "O candidato já possui um curso cadastrado!";
+			this.message = "O candidato já possui uma sala cadastrada!";
 			
 			return;
 		}
@@ -90,7 +98,7 @@ public class ClassroomBeans {
 			this.status = false;
 			this.message = "O curso do candidato é diferente do curso da sala!";
 			
-		} else {
+		} else if ( classroom.getCapacity() > 0){
 			
 			candidate.setCodClassroom(classroom.getCodeClass());
 			classroom.setCapacity(classroom.getCapacity() - 1);
@@ -100,6 +108,9 @@ public class ClassroomBeans {
 			
 			this.status = true;
 			this.message = "Distribção feita com sucesso!";
+		} else {
+			this.status = false;
+			this.message = "A sala já atingiu sua capacidade!";
 		}
 	}// distribute
 	

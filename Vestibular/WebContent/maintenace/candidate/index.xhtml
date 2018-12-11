@@ -18,6 +18,20 @@
 			</div>
 		</div>
 		
+		<h:panelGrid id="statusMessage">
+			<h:panelGrid  styleClass="mt-3 mb-3" rendered="#{candidateBeans.status != null and candidateBeans.status == false}">
+				<div class="col">
+					<h:outputText value="#{candidateBeans.message}" class="alert alert-danger" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+			
+			<h:panelGrid styleClass="mt-3 mb-3"  rendered="#{candidateBeans.status != null and candidateBeans.status == true}">
+				<div class="col">
+					<h:outputText value="#{candidateBeans.message}" class="alert alert-success" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+		</h:panelGrid>
+		
 		<h:messages styleClass="alert alert-danger mt-3 mb-3"/>
 
 		<div class="container">

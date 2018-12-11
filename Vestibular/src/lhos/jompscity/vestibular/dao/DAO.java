@@ -55,6 +55,8 @@ public class DAO<T> {
 		
 		this.entityManager.remove(this.entityManager.merge(objectT));
 		
+		this.entityManager.flush();
+		
 		this.entityManager.getTransaction().commit();
 		
 		this.entityManager.close();

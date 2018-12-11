@@ -17,6 +17,20 @@
 				<hr />
 			</div>
 		</div>
+		
+		<h:panelGrid id="statusMessage">
+			<h:panelGrid  styleClass="mt-3 mb-3" rendered="#{answerTestBeans.status != null and answerTestBeans.status == false}">
+				<div class="col">
+					<h:outputText value="#{answerTestBeans.message}" class="alert alert-danger" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+			
+			<h:panelGrid styleClass="mt-3 mb-3"  rendered="#{answerTestBeans.status != null and answerTestBeans.status == true}">
+				<div class="col">
+					<h:outputText value="#{answerTestBeans.message}" class="alert alert-success" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+		</h:panelGrid>
 
 		<div class="container">
 			<h:form id="cadastro">

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,10 +31,10 @@ public class Course {
 	
 	private Integer totalSubscribers; 
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="course")
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="course")
 	private List<Candidate> candidates = new ArrayList<Candidate>();
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="course")
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="course")
 	private List<Classroom> classrooms = new ArrayList<Classroom>();
 
 	public Course() {}

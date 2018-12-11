@@ -23,6 +23,10 @@ public class CandidateBeans {
 	private Integer vacancy;
 	private String numInscricao;
 	
+	// Para exibir a mensagem de retorno
+	private Boolean status = null;
+	private String message = "";
+	
 	public CandidateBeans() {
 		
 		if (candidate.getId() != null) {
@@ -35,7 +39,11 @@ public class CandidateBeans {
 	// Chamado ao clicar no botao cadastrar
 	public void register () {
 		
-		if(candidate.getId() == null) {
+		if (idCourse == null || idCourse == 0) {
+			status = false;
+			message = "Selecione um curso ou cadastre um antes!";
+			
+		} else if(candidate.getId() == null) {
 			
 			Course course = daoCourse.searchById(idCourse);
 			
@@ -48,10 +56,18 @@ public class CandidateBeans {
 				
 				daoCourse.update(course);
 				
+				status = true;
+				message = "Candidato cadastrado com sucesso!";
+				
 				setCandidate(new Candidate());
+			} else {
+				status = false;
+				message = "O curso já atingiu o número de vagas!";
 			}
 		} else {
 			dao.update(candidate);
+			status = true;
+			message = "Candidato alterado com sucesso!";
 		}
 	}// register
 	
@@ -69,9 +85,13 @@ public class CandidateBeans {
 	
 	// Chamado ao mudar o item do select
 	public void numVacancy() {
-		Course course = daoCourse.searchById(idCourse);
 		
-		vacancy = course.getNumVacancy() - course.getTotalSubscribers();
+		if (idCourse == 0)
+			vacancy = 0;
+		else {
+			Course course = daoCourse.searchById(idCourse);
+			vacancy = course.getNumVacancy() - course.getTotalSubscribers();
+		}
 	}
 	
 	// Chamado ao clicar no botao pesquisar.
@@ -134,5 +154,13 @@ public class CandidateBeans {
 
 	public void setNumInscricao(String numInscricao) {
 		this.numInscricao = numInscricao;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public String getMessage() {
+		return message;
 	}
 }

@@ -48,7 +48,7 @@ public class Candidate implements Comparable<Candidate> {
 	@ManyToOne
 	private Classroom classroom;
 	
-	@OneToOne
+	@OneToOne(mappedBy="candidate")
 	private Result result;
 
 	private String answer;
@@ -143,6 +143,10 @@ public class Candidate implements Comparable<Candidate> {
 		return result;
 	}
 	
+	public void setResult(Result result) {
+		this.result = result;
+	}
+
 	public String getAnswer() {
 		return answer;
 	}

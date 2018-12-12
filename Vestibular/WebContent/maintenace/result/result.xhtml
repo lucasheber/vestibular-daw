@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row mt-5"></div>
+
+		<div class="row mt-5">
+			<div class="col-sm-12 col-md-12">
+				<h3 class="text-left">Corrigir</h3>
+				<hr />
+			</div>
+		</div>
+		
+		<h:panelGrid id="statusMessage">
+			<h:panelGrid  styleClass="mt-3 mb-3" rendered="#{resultBeans.status != null and resultBeans.status == false}">
+				<div class="col">
+					<h:outputText value="#{resultBeans.message}" class="alert alert-danger" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+			
+			<h:panelGrid styleClass="mt-3 mb-3"  rendered="#{resultBeans.status != null and resultBeans.status == true}">
+				<div class="col">
+					<h:outputText value="#{resultBeans.message}" class="alert alert-success" role="alert"/>
+		  		</div>
+			</h:panelGrid>
+		</h:panelGrid>
+
+		<p:messages/>
+		
+		<h:form enctype="multipart/form-data">
+    		<p:fileUpload value="#{resultBeans.uploadedFile}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(txt)$/" invalidFileMessage="Formato de arquivo inválido!" label="Selecione um arquivo..." auto="true" multiple="false"/>
+			
+			<h:outputLabel styleClass="pl-3 pr-3" value="#{resultBeans.uploadedFile.fileName}" />
+			
+			<h:commandButton value="Corrigir" action="#{resultBeans.correct}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

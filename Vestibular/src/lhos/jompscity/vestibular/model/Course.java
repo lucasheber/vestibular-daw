@@ -108,6 +108,8 @@ public class Course {
 		candidates.sort(new Comparator<Candidate>() {
 			@Override
 			public int compare(Candidate candidate, Candidate anotherCandidate) {
+				if (candidate.getResult() == null || anotherCandidate.getResult() == null)
+					return 0;
 				if (candidate.getResult().getHits() < anotherCandidate.getResult().getHits())
 					return -1;
 				if (candidate.getResult().getHits() > anotherCandidate.getResult().getHits())
@@ -117,5 +119,18 @@ public class Course {
 		});
 		
 		return candidates;
+	}
+	
+	public String toString(List<Candidate> candidates) {
+		StringBuffer buffer = new StringBuffer(String.format("Curso: %s\n", name));
+		
+		buffer.append("Número de Inscrição\tData de Nascimento\tColocação\t\tNome\n");
+		
+		for (Candidate candidate : candidates) 
+			buffer.append(candidate.toString() + "\n");
+		
+		buffer.append(String.format("Total de candidatos: %d\n\n", candidates.size()));	
+		
+		return buffer.toString();
 	}
 }

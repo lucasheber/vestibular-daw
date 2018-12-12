@@ -42,4 +42,9 @@ public class AnswerTest {
 	public void setAnswer(Character answer) {
 		this.answer = answer;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("\t%d\t\t%s", question, answer);
+	}
 }

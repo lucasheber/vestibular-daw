@@ -1,6 +1,7 @@
 package lhos.jompscity.vestibular.beans;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -77,6 +78,10 @@ public class AnswerTestBeans {
 		return answers;
 	}
 	
+	public List<AnswerTest> getAnswersTest() {
+		return dao.list();
+	}
+	
 	public void setAnswers(String answers) {
 		this.answers = answers;
 	}
@@ -111,5 +116,16 @@ public class AnswerTestBeans {
 
 	public void setQuestion(Long question) {
 		this.question = question;
+	}
+	
+	public String report() {
+		StringBuffer buffer = new StringBuffer("----------------------- Gabarito -----------------------\n\n");
+		
+		buffer.append("Número da questão\tResposta\n");
+		
+		for (AnswerTest answer : dao.list()) 
+			buffer.append(answer + "\n");
+		
+		return buffer.toString();
 	}
 }

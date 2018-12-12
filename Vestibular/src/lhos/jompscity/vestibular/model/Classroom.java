@@ -61,10 +61,19 @@ public class Classroom {
 	}
 	
 	public List<Candidate> getCandidates() {
+		candidates.sort(null);
 		return candidates;
 	}
 	
 	public void setCandidates(List<Candidate> candidates) {
 		this.candidates = candidates;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s\t%s\t%d\t\t%d", getCodeClass(), 
+				  course.getName(),
+				  capacity,
+				  capacity - candidates.size());
 	}
 }

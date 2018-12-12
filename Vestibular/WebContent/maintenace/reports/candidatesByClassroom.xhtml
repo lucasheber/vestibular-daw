@@ -15,27 +15,27 @@
 
 		<div class="row mt-5">
 			<div class="col-sm-12 col-md-12">
-				<h3 class="text-left">Candidatos por Curso</h3>
-				<hr />
+				<h3 class="text-left">Candidatos por Sala</h3>
+				<hr/>
 			</div>
 		</div>
 		<h:form>
 			<div class="form-group col-md-2">
 				 <h:commandButton value="Baixar relatório" ajax="false" class="btn btn-download">
-			        <p:fileDownload value="#{fileDownloadView.download('candidatos-por-curso', courseBeans.report())}"/>
+			        <p:fileDownload value="#{fileDownloadView.download('candidatos-por-sala', classroomBeans.reportCandidatesByClassroom())}"/>
 			    </h:commandButton>
 			</div>
-			
-			<h:dataTable styleClass="table" value="#{courseBeans.courses}" var="course">
+		
+			<h:dataTable styleClass="table" value="#{classroomBeans.classrooms}" var="classroom">
 				<p:column>
 					<div class="row mt-5">
 						<div class="col-sm-12 col-md-12">
-							<h4 class="text-left">#{course.name}</h4>
+							<h4 class="text-left">#{classroom.codeClass}</h4>
 						</div>
 					</div>
 			
 					<div class="col-sm-12 col-md-12">
-						<h:dataTable styleClass="table" value="#{course.candidatesByScore}" var="candidate">
+						<h:dataTable styleClass="table" value="#{classroom.candidates}" var="candidate">
 							<p:column>
 								<f:facet name="header">Inscrição</f:facet>
 									#{candidate.registrationNumber}
@@ -52,7 +52,7 @@
 								<f:facet name="header">Colocação</f:facet>
 								<c:choose>
 									<c:when test="${not empty candidate.score}">
-										${candidate.course.candidatesByScore.indexOf(candidate)+1}
+										${candidate.rowIndex + 1}
 									</c:when>
 									<c:otherwise>
 										PENDENTE
@@ -61,7 +61,7 @@
 							</p:column>
 						</h:dataTable>
 						<div class="col sm-12">
-							<strong>Total de Candidatos: ${fn:length(course.candidates)}</strong>
+							<strong>Total de Candidatos: ${fn:length(classroom.candidates)}</strong>
 						</div>
 					</div>
 				</p:column>

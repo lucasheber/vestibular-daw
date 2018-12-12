@@ -174,4 +174,15 @@ public class CandidateBeans {
 	public String getMessage() {
 		return message;
 	}
+	
+	public String report() {
+		StringBuffer buffer = new StringBuffer("----------------------- Candidatos -----------------------\n\n");
+		
+		buffer.append("Número de Inscrição\tData de Nascimento\tColocação\t\tNome\n");
+		
+		for (Candidate candidate : this.getCandidates()) 
+			buffer.append(candidate + "\n");
+		
+		return buffer.toString();
+	}
 }

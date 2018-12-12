@@ -6,7 +6,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="corpo">
@@ -14,7 +15,7 @@
 
 		<div class="row mt-5">
 			<div class="col-sm-12 col-md-12">
-				<h3 class="text-left">Todos os candidatos</h3>
+				<h3 class="text-left">Salas</h3>
 				<hr />
 			</div>
 		</div>
@@ -23,42 +24,28 @@
 			<h:form id="lista">
 				<div class="form-group col-md-2">
 					 <h:commandButton value="Baixar relatório" ajax="false" class="btn btn-download">
-				        <p:fileDownload value="#{fileDownloadView.download('candidatos', candidateBeans.report())}"/>
+				        <p:fileDownload value="#{fileDownloadView.download('salas', classroomBeans.report())}"/>
 				    </h:commandButton>
 				</div>
+			
 				<fieldset>
-					<h:dataTable styleClass="table" value="#{candidateBeans.candidates}" var="candidate">
+					<h:dataTable styleClass="table" value="#{classroomBeans.classrooms}" var="classroom">
 						<p:column>
-							<f:facet name="header">Inscrição</f:facet>
-							#{candidate.registrationNumber}
+							<f:facet name="header">Código</f:facet>
+								#{classroom.codeClass}
 						</p:column>
-
 						<p:column>
-							<f:facet name="header">Nome</f:facet>
-							#{candidate.name}
+							<f:facet name="header">Curso</f:facet>
+								#{classroom.course.name}
 						</p:column>
-						
 						<p:column>
-							<f:facet name="header">Data de Nascimento</f:facet>
-							#{candidate.birthdayStr}
+						<f:facet name="header">Capacidade</f:facet>
+								#{classroom.capacity}
 						</p:column>
-						
 						<p:column>
-							<f:facet name="header">Nome do curso</f:facet>
-							#{candidate.course.name}
+							<f:facet name="header">Vagas disponíveis</f:facet>
+								#{classroom.capacity - fn:length(classroom.candidates)}
 						</p:column>
-						
-						<p:column>
-							<f:facet name="header">Colocação</f:facet>
-							<c:choose>
-								<c:when test="${not empty candidate.result}">
-									${candidate.course.candidatesByScore.indexOf(candidate)+1}
-								</c:when>
-								<c:otherwise>
-									PENDENTE
-								</c:otherwise>
-							</c:choose>
-						</p:column>					
 					</h:dataTable>
 				</fieldset>
 			</h:form>

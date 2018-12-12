@@ -211,4 +211,11 @@ public class Candidate implements Comparable<Candidate> {
 	public int compareTo(Candidate anotherCandidate) {
 		return name.compareToIgnoreCase(anotherCandidate.name);
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s\t\t\t%s\t\t%s\t\t%s", 
+				getRegistrationNumber(), birthdayStr, 
+				(result != null) ? course.getCandidatesByScore().indexOf(this) + 1 : "PENDENTE", name);
+	}
 }

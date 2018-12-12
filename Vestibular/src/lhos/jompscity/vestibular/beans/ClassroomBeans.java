@@ -20,7 +20,6 @@ public class ClassroomBeans {
 
 	private Classroom classroom = new Classroom();
 	private DAO<Classroom> dao = new DAO<>(Classroom.class);
-//	private DAO<Course> daoCourse = new DAO<>(Course.class);
 	private DAO<Candidate> daoCandidate = new DAO<>(Candidate.class);
 	
 	private Long idCourse;
@@ -193,5 +192,37 @@ public class ClassroomBeans {
 
 	public void setSearch(String search) {
 		this.search = search;
+	}
+	
+	public String report() {
+		StringBuffer buffer = new StringBuffer("----------------------- Lista de salas -----------------------\n\n");
+		
+		buffer.append("Código\tCurso\tCapacidade\tVagas disponíveis\n");
+		
+		for (Classroom classroom : dao.list()) 
+			buffer.append(classroom.toString() + "\n");
+		
+		return buffer.toString();
+	}
+	
+	public String reportCandidatesByClassroom() {
+		List<Candidate> candidates;
+		StringBuffer buffer = new StringBuffer("----------------------- Lista de candidatso por sala -----------------------\n\n");
+		
+		for (Classroom classroom : dao.list()) {
+			buffer.append(String.format("Sala: %s\n", classroom.getCodeClass()));
+			
+			candidates = classroom.getCandidates();
+			candidates.sort(null);
+			
+			buffer.append("Número de Inscrição\tData de Nascimento\tColocação\t\tNome\n");
+			
+			for (Candidate candidate : candidates) 
+				buffer.append(candidate.toString() + "\n");
+			
+			buffer.append(String.format("Total de candidatos: %d\n\n", candidates.size()));	
+		}
+		
+		return buffer.toString();
 	}
 }

@@ -51,7 +51,7 @@ public class ClassroomBeans {
 	// Chamado ao clicar no botao remover
 	public void delete (Classroom classroom) {
 
-		updateCandidates(classroom.getCodeClass());
+//		updateCandidates(classroom.getCodeClass());
 		
 		dao.remove(classroom);
 		

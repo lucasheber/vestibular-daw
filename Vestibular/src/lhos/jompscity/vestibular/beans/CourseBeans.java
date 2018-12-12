@@ -7,7 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import lhos.jompscity.vestibular.dao.DAO;
+import lhos.jompscity.vestibular.model.Candidate;
 import lhos.jompscity.vestibular.model.Course;
+import sun.util.resources.cldr.se.CurrencyNames_se;
 
 @ViewScoped
 @ManagedBean
@@ -92,5 +94,23 @@ public class CourseBeans {
 
 	public void setSearch(String search) {
 		this.search = search;
+	}
+	
+	public String reportApprovedCandidates() {
+		StringBuffer buffer = new StringBuffer("----------------------- Lista de cursos -----------------------\n\n");
+		
+		for (Course course : dao.list()) 
+			buffer.append(course.toString(course.getCandidatesByScore()));
+		
+		return buffer.toString();
+	}
+	
+	public String report() {
+		StringBuffer buffer = new StringBuffer("----------------------- Lista de cursos -----------------------\n\n");
+		
+		for (Course course : dao.list()) 
+			buffer.append(course.toString(course.getCandidates()));
+		
+		return buffer.toString();
 	}
 }

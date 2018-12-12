@@ -19,8 +19,13 @@
 			</div>
 		</div>
 
-		<div class="col mt-5">
+		<div class="col mt-2">
 			<h:form id="lista">
+				<div class="form-group col-md-2">
+					 <h:commandButton value="Baixar relatório" ajax="false" class="btn btn-download">
+				        <p:fileDownload value="#{fileDownloadView.download('candidatos', candidateBeans.report())}"/>
+				    </h:commandButton>
+				</div>
 				<fieldset>
 					<h:dataTable styleClass="table" value="#{candidateBeans.candidates}" var="candidate">
 						<p:column>

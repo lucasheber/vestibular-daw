@@ -120,4 +120,17 @@ public class Course {
 		
 		return candidates;
 	}
+	
+	public String toString(List<Candidate> candidates) {
+		StringBuffer buffer = new StringBuffer(String.format("Curso: %s\n", name));
+		
+		buffer.append("Número de Inscrição\tData de Nascimento\tColocação\t\tNome\n");
+		
+		for (Candidate candidate : candidates) 
+			buffer.append(candidate.toString() + "\n");
+		
+		buffer.append(String.format("Total de candidatos: %d\n\n", candidates.size()));	
+		
+		return buffer.toString();
+	}
 }

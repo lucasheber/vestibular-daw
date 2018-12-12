@@ -16,49 +16,57 @@
 		<div class="row mt-5">
 			<div class="col-sm-12 col-md-12">
 				<h3 class="text-left">Candidatos por Curso</h3>
+				<hr />
 			</div>
 		</div>
-		
-		<h:dataTable styleClass="table" value="#{courseBeans.courses}" var="course">
-			<p:column>
-				<div class="row mt-5">
+		<h:form>
+			<div class="form-group col-md-2">
+				 <h:commandButton value="Baixar relatório" ajax="false" class="btn btn-download">
+			        <p:fileDownload value="#{fileDownloadView.download('candidatos-por-curso', courseBeans.report())}"/>
+			    </h:commandButton>
+			</div>
+			
+			<h:dataTable styleClass="table" value="#{courseBeans.courses}" var="course">
+				<p:column>
+					<div class="row mt-5">
+						<div class="col-sm-12 col-md-12">
+							<h4 class="text-left">#{course.name}</h4>
+						</div>
+					</div>
+			
 					<div class="col-sm-12 col-md-12">
-						<h4 class="text-left">#{course.name}</h4>
+						<h:dataTable styleClass="table" value="#{course.candidatesByScore}" var="candidate">
+							<p:column>
+								<f:facet name="header">Inscrição</f:facet>
+									#{candidate.registrationNumber}
+							</p:column>
+							<p:column>
+								<f:facet name="header">Nome</f:facet>
+									#{candidate.name}
+							</p:column>
+							<p:column>
+								<f:facet name="header">Data de Nascimento</f:facet>
+									#{candidate.birthdayStr}
+							</p:column>
+							<p:column>
+								<f:facet name="header">Colocação</f:facet>
+								<c:choose>
+									<c:when test="${not empty candidate.score}">
+										${candidate.course.candidatesByScore.indexOf(candidate)+1}
+									</c:when>
+									<c:otherwise>
+										PENDENTE
+									</c:otherwise>
+								</c:choose>
+							</p:column>
+						</h:dataTable>
+						<div class="col sm-12">
+							<strong>Total de Candidatos: ${fn:length(course.candidates)}</strong>
+						</div>
 					</div>
-				</div>
-		
-				<div class="col-sm-12 col-md-12">
-					<h:dataTable styleClass="table" value="#{course.candidatesByScore}" var="candidate">
-						<p:column>
-							<f:facet name="header">Inscrição</f:facet>
-								#{candidate.registrationNumber}
-						</p:column>
-						<p:column>
-							<f:facet name="header">Nome</f:facet>
-								#{candidate.name}
-						</p:column>
-						<p:column>
-							<f:facet name="header">Data de Nascimento</f:facet>
-								#{candidate.birthdayStr}
-						</p:column>
-						<p:column>
-							<f:facet name="header">Colocação</f:facet>
-							<c:choose>
-								<c:when test="${not empty candidate.score}">
-									${candidate.course.candidatesByScore.indexOf(candidate)+1}
-								</c:when>
-								<c:otherwise>
-									PENDENTE
-								</c:otherwise>
-							</c:choose>
-						</p:column>
-					</h:dataTable>
-					<div class="col sm-12">
-						<strong>Total de Candidatos: ${fn:length(course.candidates)}</strong>
-					</div>
-				</div>
-			</p:column>
-		</h:dataTable>
+				</p:column>
+			</h:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

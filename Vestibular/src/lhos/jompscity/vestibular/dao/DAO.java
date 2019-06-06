@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
+// Teste
 public class DAO<T> {
 
 	private Class<T> classe;
